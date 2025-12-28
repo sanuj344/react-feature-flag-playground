@@ -39,7 +39,8 @@ useEffect(() => {
               checked={flags[flag]}
               onChange={() => toggleFlag(flag)}
             />
-            {flag}
+           {flag.replace(/([A-Z])/g, " $1")}
+
           </label>
         ))}
       </div>
