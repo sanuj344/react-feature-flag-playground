@@ -1,12 +1,23 @@
 import { useState } from "react";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
-  const [flags, setFlags] = useState({
-    newNavbar: true,
-    betaBanner: false,
-    darkMode: false,
-  });
+  const [flags, setFlags] = useState(() => {
+  const saved = localStorage.getItem("flags");
+  return saved
+    ? JSON.parse(saved)
+    : {
+        newNavbar: true,
+        betaBanner: false,
+        darkMode: false,
+      };
+});
+
+useEffect(() => {
+  localStorage.setItem("flags", JSON.stringify(flags));
+}, [flags]);
+
 
   const toggleFlag = (flag) => {
     setFlags((prev) => ({
